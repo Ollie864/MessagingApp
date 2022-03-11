@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.RegisterPage"
+             Title="Registration Page">
+
+    <StackLayout Padding="60">
+        <Label Text="Registration Page" FontSize="Large"/>
+        <Label Text="Please make sure password contains at least one special character, one uppercase letter, a number and is longer than 8 characters" FontSize="Small"/>
+        <Entry x:Name="registrationUsername" Placeholder="Enter username"/>
+        <Entry x:Name="registationEmail" Placeholder="Enter an email"/>
+        <Entry x:Name="registrationPhoneNumber" Placeholder="Enter Phone number"/>
+        <Entry x:Name="registrationPassword" IsPassword="True" Placeholder="Enter Password"/>
+        <Entry x:Name="confirmPassword" IsPassword="True" Placeholder="Confirm Password"/>
+        <Button Text="Show Password" Clicked="Button_Clicked"/>
+        <Button x:Name="buttonToRegister" Text="Click here to register" Clicked="buttonToRegister_Clicked"/>
+
+
+    </StackLayout>
+
+    
+</ContentPage>

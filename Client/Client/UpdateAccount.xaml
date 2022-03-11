@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.UpdateAccount"
+             Title="Update Account Settings">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Leave field blank if you do not wish to change it"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="updateUsername" Placeholder="Enter username"/>
+            <Entry x:Name="updateEmail" Placeholder="Enter an email"/>
+            <Entry x:Name="updatePhoneNumber" Placeholder="Enter Phone number"/>
+            <Entry x:Name="updatePassword" IsPassword="True" Placeholder="Enter Password"/>
+            <Button Text="Update Account Details" Clicked="Button_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

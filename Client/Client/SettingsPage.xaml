@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.SettingsPage"
+             Title="Settings">
+
+
+    <ContentPage>
+
+     <StackLayout>
+        <Label Text="Dark Theme: " FontSize="Large" HorizontalOptions="Center" Margin="30"/>
+        <Switch x:Name="darkThemeToggle" HorizontalOptions="Center" Scale="2"/>
+        <Button Text="Save" Clicked="Button_Clicked"/>
+        <Button Text="Clear" Clicked="Button_Clicked_1"/>
+        <Label Text="Swiper for Account settings --->" />
+    </StackLayout>
+       
+    </ContentPage>
+    <ContentPage>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Account Settings"  FontSize="Large"/>
+            <Button Text="Delete Account" Clicked="Button_Clicked_2"/>
+            <Button Text="Change Password" Clicked="Button_Clicked_3"/>
+            <Button Text="Change Username"/>
+            <Button Text="Change Email"/>
+            <Button Text="Phone Number"/>
+
+        </StackLayout>
+    </ContentPage>
+
+    
+</CarouselPage>

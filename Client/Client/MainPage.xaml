@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Client.MainPage"
+             Title="Chat Room">
+
+        <StackLayout>
+         <Grid>
+         <Button Text="Connect" Clicked="Button_Clicked" Grid.Column="0"/>
+         <Button Text="Settings" Clicked="Button_Clicked_2" Grid.Column="1"/>
+         <Button Text="User List" Clicked="Button_Clicked_3" Grid.Column="2"/>
+            </Grid>
+         <ScrollView VerticalOptions="FillAndExpand">
+             <StackLayout x:Name="stackMessages">
+            
+             </StackLayout>
+         </ScrollView>
+        
+         <Entry x:Name="messageBox" Completed="Button_Clicked_1" VerticalOptions="EndAndExpand"/>
+         <Button Text="Send" Clicked="Button_Clicked_1" VerticalOptions="End"/>
+            <Label x:Name="usernameLabel" FontSize="Small"/>
+        </StackLayout>
+
+</ContentPage>
