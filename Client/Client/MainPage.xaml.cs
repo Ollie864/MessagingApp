@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Client.Models;
+using System.Security.Cryptography;
+using System.IO;
 
 
 namespace Client
@@ -97,5 +99,25 @@ namespace Client
         {
             await Navigation.PushAsync(new UserList());
         }
+        public string EncryptMessage()
+        {
+            Aes cipher = CreateEncryption();
+            return "hello";
+        }
+        public Aes CreateEncryption()
+        {
+            //Creates a default encryption with default settings
+            Aes encryptionScheme = Aes.Create();
+
+            //Creating a byte array to use as a key
+
+            string keyString = "3B891783728818923";
+
+            encryptionScheme.Key = Encoding.ASCII.GetBytes(keyString);
+            return encryptionScheme;
+
+
+        }
+
     }
 }
