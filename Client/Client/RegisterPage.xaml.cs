@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Text.RegularExpressions;
 using Client.Models;
+using System.Security.Cryptography;
 
 namespace Client
 {
@@ -31,7 +32,8 @@ namespace Client
              await App.Database.SaveContact(new Data.Contact
              {
                 Name = registrationUsername.Text,
-                Password = registrationPassword.Text,
+                //Password = registrationPassword.Text,
+                Password = HashPassword(),
                 Email = registationEmail.Text,
                 PhoneNumber = Convert.ToInt32(registrationPhoneNumber.Text)
               });
@@ -124,9 +126,6 @@ namespace Client
             {
                 isStrong = false;
             }
-
-
-
             if (!correctLength)
             {
                 DisplayAlert("Account not created", "Password is too short", "Ok");
@@ -152,9 +151,20 @@ namespace Client
                 return true;
             }
             return false;
-
-            
         }
+
+        private string HashPassword()
+        {
+            SHA512 hashSvc = SHA512.Create();
+            //Converting the text to a byte array and using the aclorithm
+            byte[] hash = hashSvc.ComputeHash(Encoding.UTF8.GetBytes(registrationPassword.Text));
+            return Convert.ToBase64String(hash);
+        }
+
+
+
+
+
         //If the user clicks the reveal password button it will invert the .IsPassword property allowing the text to be seen
         private void Button_Clicked(object sender, EventArgs e)
         {

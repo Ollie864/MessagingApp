@@ -18,6 +18,8 @@ namespace Client
         //Creates a new hub connection type called connection
         HubConnection connection;
         public string Username;
+        private Aes cipher = CreateEncryption();
+        private string IV;
 
         //The constructor takes a string username from the previous login page and assigns it to another string called Username
         public MainPage(string username)
@@ -51,7 +53,8 @@ namespace Client
                 //This section was done in the code behind as it is dynamic
                 connection.On<string, string>("ReceiveMessage", (user, message) =>
                 {
-                    Label label = new Label { Text = $"{user}: {message}", HorizontalOptions = LayoutOptions.Start, FontSize = 20};
+                    string plainMessage = DecryptMessage(message);
+                    Label label = new Label { Text = $"{user}: {plainMessage}", HorizontalOptions = LayoutOptions.Start, FontSize = 20};
                     stackMessages.Children.Add(label);
 
                 });
@@ -82,7 +85,8 @@ namespace Client
             else
             {
 
-                await connection.InvokeAsync("SendMessage", Username, messageBox.Text);
+                //await connection.InvokeAsync("SendMessage", Username, messageBox.Text);
+                await connection.InvokeAsync("SendMessage", Username, EncryptMessage(messageBox.Text));
             }
             messageBox.Text = string.Empty;
 
@@ -99,21 +103,41 @@ namespace Client
         {
             await Navigation.PushAsync(new UserList());
         }
-        public string EncryptMessage()
+        public string EncryptMessage(string plainMessage)
         {
-            Aes cipher = CreateEncryption();
-            return "hello";
+
+            IV = Convert.ToBase64String(cipher.IV);
+            ICryptoTransform cryptoTransform = cipher.CreateEncryptor();
+            byte[] plainMessageBytes = Encoding.UTF8.GetBytes(plainMessage);
+            byte[] cipherText = cryptoTransform.TransformFinalBlock(plainMessageBytes, 0, plainMessageBytes.Length);
+
+            string CipherText = Convert.ToBase64String(cipherText);
+            return CipherText;
         }
-        public Aes CreateEncryption()
+        public string DecryptMessage(string cipherMessage)
+        {
+            //Using the same Initialisation vector for decryption
+            cipher.IV = Convert.FromBase64String(IV);
+
+            ICryptoTransform cryptoTransform = cipher.CreateDecryptor();
+            byte[] cipherText = Convert.FromBase64String(cipherMessage);
+            byte[] plainText = cryptoTransform.TransformFinalBlock(cipherText, 0, cipherText.Length);
+            //string PlainText = Convert.ToBase64String(plainText);
+            string PlainText = Encoding.UTF8.GetString(plainText);
+
+            return PlainText;
+
+        }
+        public static Aes CreateEncryption()
         {
             //Creates a default encryption with default settings
             Aes encryptionScheme = Aes.Create();
 
-            //Creating a byte array to use as a key
+            //encryptionScheme.Mode = CipherMode.ECB
+            string stringKey = "02onvfdkkhgj8723";
 
-            string keyString = "3B891783728818923";
+            encryptionScheme.Key = Encoding.ASCII.GetBytes(stringKey);
 
-            encryptionScheme.Key = Encoding.ASCII.GetBytes(keyString);
             return encryptionScheme;
 
 

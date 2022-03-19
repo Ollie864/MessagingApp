@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Client.Models;
 using Client.Data;
+using System.Security.Cryptography;
 
 namespace Client
 {
@@ -60,7 +61,7 @@ namespace Client
                 else
                 {
                     //Checks whether the password is equal to the password entry and assignes the userID variable to the ID of the user with the given username
-                    if (users[0].Password == passwordEntry.Text)
+                    if (users[0].Password == HashPassword())
                     {
                         UserSettings.setuserID(users[0].Id);
                         await Navigation.PushAsync(new MainPage(usernameEntry.Text));
@@ -77,6 +78,16 @@ namespace Client
                     await DisplayAlert("Error", "Please make sure you have entered your details correctly", "ok");
             }
         }
+        private string HashPassword()
+        {
+            //SHA512 hashSvc = SHA512.Create();
+            SHA512 hashSvc = SHA512.Create();
+            //Converting the text to a byte array and using the aclorithm
+            byte[] hash = hashSvc.ComputeHash(Encoding.UTF8.GetBytes(passwordEntry.Text));
+            return Convert.ToBase64String(hash);
+        }
+
+
 
 
     }
