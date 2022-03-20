@@ -26,7 +26,7 @@ namespace Client
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-                var users = await App.Database.GetSpecificContact(UserSettings.getUserID());
+            List<Data.Contact> users = await App.Database.GetSpecificContact(UserSettings.getUserID());
                 if (updatePassword.Text != null)
                 {
                     if (validPassword() == true)
@@ -55,7 +55,7 @@ namespace Client
                         users[0].Email = updateEmail.Text;
                     }
                 }
-                    await DisplayAlert("Success", "Account details updated", "ok");
+                await DisplayAlert("Success", "Account details updated", "ok");
 
         }
         private bool validateInput()

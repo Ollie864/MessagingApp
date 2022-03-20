@@ -15,7 +15,6 @@
                         <Label Text="{Binding Email}" FontSize="Small"/>
                         <Label Text="{Binding PhoneNumber}" FontSize="Small"/>
                         <Label Text="{Binding Id}" FontSize="Small"/>
-                        <Label Text="{Binding Password}" FontSize="Small"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
