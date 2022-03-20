@@ -63,9 +63,14 @@ namespace Client
             {
                 DisplayAlert("Account not created", "Username can not be longer than 15 characters", "Ok");
             }
-            else if ((registrationPhoneNumber.Text.Length < 11) && (registrationPhoneNumber.Text.Length > 5))
+            else if (registrationPhoneNumber.Text.Length < 5)
             {
-                DisplayAlert("Invalid Phone number", "Phone numbers not right length", "Ok");
+                DisplayAlert("Invalid Phone number", "Phone numbers too short", "Ok");
+            }
+            else if(registrationPhoneNumber.Text.Length > 13)
+            {
+                DisplayAlert("Invalid Phone number", "Phone numbers too long", "Ok");
+
             }
             else if (int.TryParse(registrationPhoneNumber.Text, out int result) == false)
             {

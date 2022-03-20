@@ -87,9 +87,14 @@ namespace Client
         }
         private bool validPhone()
         {
-            if ((updatePhoneNumber.Text.Length < 11) && (updatePhoneNumber.Text.Length < 5))
+            if (updatePhoneNumber.Text.Length < 5)
             {
-                DisplayAlert("Invalid Phone number", "Phone numbers not right length", "Ok");
+                DisplayAlert("Invalid Phone number", "Phone numbers too short", "Ok");
+                return false;
+            }
+            else if (updatePhoneNumber.Text.Length > 11)
+            {
+                DisplayAlert("Invalid Phone number", "Phone numbers too long", "Ok");
                 return false;
             }
             else if (int.TryParse(updatePhoneNumber.Text, out int result) == false)
@@ -101,7 +106,6 @@ namespace Client
             {
                 return true;
             }
-            return false;
         }
 
         private bool validEmail()

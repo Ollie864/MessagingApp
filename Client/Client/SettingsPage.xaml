@@ -20,10 +20,8 @@
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Label Text="Account Settings"  FontSize="Large"/>
             <Button Text="Delete Account" Clicked="Button_Clicked_2"/>
-            <Button Text="Change Password" Clicked="Button_Clicked_3"/>
-            <Button Text="Change Username"/>
-            <Button Text="Change Email"/>
-            <Button Text="Phone Number"/>
+            <Button Text="Update Account" Clicked="Button_Clicked_3"/>
+            <Button Text="View Account Details" Clicked="Button_Clicked_4"/>
 
         </StackLayout>
     </ContentPage>

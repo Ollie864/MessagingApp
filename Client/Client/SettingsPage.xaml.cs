@@ -54,5 +54,13 @@ namespace Client
             await Navigation.PushAsync(new UpdateAccount());
 
         }
+
+        //Allows the user to view account details
+        private async void Button_Clicked_4(object sender, EventArgs e)
+        {
+            List<Data.Contact> users = await App.Database.GetSpecificContact(UserSettings.getUserID());
+            await DisplayAlert("Details", "Username: " + users[0].Name +"\nEmail: " + users[0].Email + "\nPhone: " + users[0].PhoneNumber + "\nPassword: " + users[0].Password, "Ok");
+
+        }
     }
 }
