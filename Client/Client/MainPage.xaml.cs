@@ -36,6 +36,7 @@ namespace Client
 
         async void StartConnection()
         {
+            string plainMessage;
             //Android does not use local host and must instad use the ip of the sever.
             string serverURL = "http://localhost:21230/chatHub";
             if (Device.RuntimePlatform == Device.Android)
@@ -53,7 +54,7 @@ namespace Client
                 //This section was done in the code behind as it is dynamic
                 connection.On<string, string>("ReceiveMessage", (user, message) =>
                 {
-                    string plainMessage = DecryptMessage(message);
+                    plainMessage = DecryptMessage(message);
                     Label label = new Label { Text = $"{user}: {plainMessage}", HorizontalOptions = LayoutOptions.Start, FontSize = 20};
                     stackMessages.Children.Add(label);
 
