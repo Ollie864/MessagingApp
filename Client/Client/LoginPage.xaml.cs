@@ -84,7 +84,9 @@ namespace Client
             SHA512 hashSvc = SHA512.Create();
             //Converting the text to a byte array and using the aclorithm
             byte[] hash = hashSvc.ComputeHash(Encoding.UTF8.GetBytes(passwordEntry.Text));
-            return Convert.ToBase64String(hash);
+            string plainPassword = BitConverter.ToString(hash).Replace("-","");
+            //return Convert.ToBase64String(plainPassword);
+            return (plainPassword);
         }
 
 
