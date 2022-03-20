@@ -54,8 +54,8 @@ namespace Client
                 //This section was done in the code behind as it is dynamic
                 connection.On<string, string>("ReceiveMessage", (user, message) =>
                 {
-                    plainMessage = DecryptMessage(message);
-                    Label label = new Label { Text = $"{user}: {plainMessage}", HorizontalOptions = LayoutOptions.Start, FontSize = 20};
+                    //plainMessage = DecryptMessage(message);
+                    Label label = new Label { Text = $"{user}: {message}", HorizontalOptions = LayoutOptions.Start, FontSize = 20};
                     stackMessages.Children.Add(label);
 
                 });
@@ -86,8 +86,8 @@ namespace Client
             else
             {
 
-                //await connection.InvokeAsync("SendMessage", Username, messageBox.Text);
-                await connection.InvokeAsync("SendMessage", Username, EncryptMessage(messageBox.Text));
+                await connection.InvokeAsync("SendMessage", Username, messageBox.Text);
+                //await connection.InvokeAsync("SendMessage", Username, EncryptMessage(messageBox.Text));
             }
             messageBox.Text = string.Empty;
 
