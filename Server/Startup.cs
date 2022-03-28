@@ -25,6 +25,7 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //The signalR service is added here
             services.AddSignalR();
         }
 
@@ -49,6 +50,7 @@ namespace Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                //This defines the address of the chatHub
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
